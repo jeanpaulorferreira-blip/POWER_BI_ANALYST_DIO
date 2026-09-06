@@ -1,0 +1,4 @@
+O arquivo original "Financial Sample.xlsx" deve ser obtido do repositório oficial da DIO:
+https://github.com/julianazanelatto/power_bi_analyst
+
+Este ZIP inclui a versão CSV dos mesmos 700 registros, sem alteração de valores.
