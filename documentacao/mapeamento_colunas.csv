@@ -1,0 +1,17 @@
+Coluna (Excel),Campo (App),Tipo
+Segment,segment,Texto
+Country,country,Texto
+Product,product,Texto
+Discount Band,discount_band,Texto
+Units Sold,units_sold,Número
+Manufacturing Price,manufacturing_price,Moeda
+Sale Price,sale_price,Moeda
+Gross Sales,gross_sales,Moeda
+Discounts,discounts,Moeda
+Sales,sales,Moeda
+COGS,cogs,Moeda
+Profit,profit,Moeda
+Date,date,Data
+Month Number,month_number,Número
+Month Name,month_name,Texto
+Year,year,Número
