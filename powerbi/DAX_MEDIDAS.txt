@@ -1,0 +1,38 @@
+=========================================================
+MEDIDAS DAX — POWER BI ANALYST (DIO)
+Base: Financial Sample (tabela "Financials")
+=========================================================
+
+Total Sales =
+SUM('Financials'[Sales])
+
+Total Units Sold =
+SUM('Financials'[Units Sold])
+
+Total Profit =
+SUM('Financials'[Profit])
+
+Total COGS =
+SUM('Financials'[COGS])
+
+Profit Margin =
+DIVIDE([Total Profit], [Total Sales], 0)
+
+Total Gross Sales =
+SUM('Financials'[Gross Sales])
+
+Total Discounts =
+SUM('Financials'[Discounts])
+
+Avg Sale Price =
+AVERAGE('Financials'[Sale Price])
+
+Profit % of Total =
+DIVIDE([Total Profit], CALCULATE([Total Profit], ALL('Financials')), 0)
+
+Units % of Total =
+DIVIDE([Total Units Sold], CALCULATE([Total Units Sold], ALL('Financials')), 0)
+
+Sales YoY % =
+VAR Prev = CALCULATE([Total Sales], DATEADD('Financials'[Date], -1, YEAR))
+RETURN DIVIDE([Total Sales] - Prev, Prev, 0)

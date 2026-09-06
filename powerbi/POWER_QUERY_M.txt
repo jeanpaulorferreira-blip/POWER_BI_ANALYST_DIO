@@ -1,0 +1,48 @@
+// =========================================================
+// POWER QUERY (M) — POWER BI ANALYST (DIO)
+// Como usar:
+//   1. No Power BI Desktop > Obter Dados > Consulta Nula (Blank Query).
+//   2. Abra o Editor Avançado e cole TODO este código.
+//   3. Substitua o caminho do arquivo em "Fonte" pelo local do
+//      "Financial Sample.xlsx" no seu computador.
+//   4. Pronto: a consulta "Financials" já vem tipada e limpa.
+// =========================================================
+
+let
+    // >>> AJUSTE O CAMINHO ABAIXO PARA O SEU ARQUIVO <<<
+    // Se a planilha tiver outro nome, troque "Sheet1" abaixo pelo nome correto.
+    Fonte = Excel.Workbook(File.Contents("C:\Projetos\Financial Sample.xlsx"), null, true),
+    Sheet1 = Fonte{[Item="Sheet1",Kind="Sheet"]}[Data],
+
+    // Promover a primeira linha como cabeçalho
+    PromoteHeader = Table.PromoteHeaders(Sheet1, [PromoteAllScalars=true]),
+
+    // Remover espaços extras dos nomes de coluna (ex.: " Sales " -> "Sales")
+    TrimNames = Table.TransformColumnNames(PromoteHeader, Text.Trim),
+
+    // Remover linhas em branco no final
+    RemoveBlanks = Table.SelectRows(TrimNames, each [Segment] <> null and [Segment] <> ""),
+
+    // Tipagem das colunas
+    Typed = Table.TransformColumnTypes(RemoveBlanks, {
+        {"Segment", type text},
+        {"Country", type text},
+        {"Product", type text},
+        {"Discount Band", type text},
+        {"Units Sold", Int64.Type},
+        {"Manufacturing Price", Currency.Type},
+        {"Sale Price", Currency.Type},
+        {"Gross Sales", Currency.Type},
+        {"Discounts", Currency.Type},
+        {"Sales", Currency.Type},
+        {"COGS", Currency.Type},
+        {"Profit", Currency.Type},
+        {"Date", type date},
+        {"Month Number", Int64.Type},
+        {"Month Name", type text},
+        {"Year", Int64.Type}
+    }),
+
+    Final = Typed
+in
+    Final
